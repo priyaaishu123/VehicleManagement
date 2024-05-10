@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    
+    <div class="container">
+        <div class="row">
+
+            <h2>Create the vehicle</h2>
+            <form action="/api/createVehicle" method="POST">
+
+        <label for="">VIN</label>
+        <input type="text">
+        <label for="">Make</label>
+        <input type="text">
+        <label for="">Model</label>
+        <input type="text">
+        <label for="">Year</label>
+        <input type="text">
+        <button type="submit">Create vehicle</button>
+            </form>
+        </div>
+
+    </div>
+    <script>
+$(document).ready(function(){
+
+$('#createVehicleForm').submit(function(event)
+{
+event.preventDefault();
+var vin=$('#vin').val();
+var make=$('#make').val();
+var model=$('#model').val();
+var year=$('#year').val();
+
+$.ajax({
+    url:'/api/createVehicle',
+    method:'POST',
+    contentType:'application/json',
+    data:JSON.stringify({
+        vin:vin,
+        make:make,
+        model:model,
+        year:year
+
+    }),
+    success:function(response){
+        console.log('vehicle created successfully:',response);
+
+    },
+    error:function(xhr,status,error){
+        console.error('Error creating vehicle:',error);
+
+    }
+
+});
+
+
+
+
+});
+
+
+
+});
+
+
+    </script>
+</body>
+</html>
